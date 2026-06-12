@@ -13,8 +13,44 @@ const rainAudio = document.getElementById("rainAudio");
 const songs = [
     "assets/audio1.mp3",
     "assets/audio2.mp3",
-    "assets/audio3.mp3"
+    "assets/audio3.mp3",
+    "assets/audio4.mp3"
 ];
+
+let shuffledSongs = [];
+let currentIndex = 0;
+
+/* ==========================
+   SHUFFLE SONGS
+========================== */
+
+function shuffleSongs() {
+
+    shuffledSongs = [...songs];
+
+    for(let i = shuffledSongs.length - 1; i > 0; i--) {
+
+        const j = Math.floor(
+            Math.random() * (i + 1)
+        );
+
+        [shuffledSongs[i], shuffledSongs[j]] =
+        [shuffledSongs[j], shuffledSongs[i]];
+    }
+
+    currentIndex = 0;
+}
+
+/* ==========================
+   LOAD CURRENT SONG
+========================== */
+
+function loadCurrentSong() {
+
+    music.src =
+    shuffledSongs[currentIndex];
+
+}
 
 /* ==========================
    CONTROLS
@@ -37,22 +73,6 @@ document.getElementById("playPauseBtn");
 ========================== */
 
 let playing = false;
-
-/* ==========================
-   RANDOM SONG
-========================== */
-
-function loadRandomSong(){
-
-    const randomSong =
-    Math.floor(
-        Math.random() * songs.length
-    );
-
-    music.src = songs[randomSong];
-
-    music.loop = true;
-}
 
 /* ==========================
    VOLUME CONTROL
@@ -98,7 +118,8 @@ playPauseBtn.addEventListener(
 
         if(!playing){
 
-            loadRandomSong();
+            shuffleSongs();
+            loadCurrentSong();
 
             music.play();
             ambience.play();
@@ -122,6 +143,29 @@ playPauseBtn.addEventListener(
 
             playing = false;
         }
+
+    }
+);
+
+/* ==========================
+   NEXT SHUFFLED SONG
+========================== */
+
+music.addEventListener(
+    "ended",
+    ()=>{
+
+        currentIndex++;
+
+        if(currentIndex >= shuffledSongs.length){
+
+            shuffleSongs();
+
+        }
+
+        loadCurrentSong();
+
+        music.play();
 
     }
 );
