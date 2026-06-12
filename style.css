@@ -235,3 +235,23 @@ button:active{
         padding:18px;
     }
 }
+.secondary-btn{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+
+    border:none;
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.15);
+
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.secondary-btn:hover{
+    background:rgba(255,255,255,0.25);
+}

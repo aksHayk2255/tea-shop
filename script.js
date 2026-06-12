@@ -147,6 +147,34 @@ playPauseBtn.addEventListener(
     }
 );
 
+const nextSongBtn =
+document.getElementById("nextSongBtn");
+
+/* ==========================
+   NEXT SONG BUTTON
+========================== */
+
+nextSongBtn.addEventListener(
+    "click",
+    ()=>{
+
+        if(!playing) return;
+
+        currentIndex++;
+
+        if(currentIndex >= shuffledSongs.length){
+
+            shuffleSongs();
+
+        }
+
+        loadCurrentSong();
+
+        music.play();
+
+    }
+);
+
 /* ==========================
    NEXT SHUFFLED SONG
 ========================== */
